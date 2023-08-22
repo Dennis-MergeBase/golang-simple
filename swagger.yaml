@@ -1,0 +1,356 @@
+swagger: "2.0"
+info:
+  description: "Dialogflow microservice to support modusLoqui editing, and chatbot retrieval"
+  version: "1.0.0"
+  title: "DialogFlow NLP Microservice"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "valerie@wyns.ca"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "modusloqui.com"
+basePath: "/v2"
+tags:
+  - name: "NLP Microservice"
+    description: "Update entities, intents, and contexts. Basically, everything you would need to update and agent."
+schemes:
+  - "https"
+  - "http"
+paths:
+  /intents/{projectID}/{projectCred}:
+    get:
+      tags:
+        - "intents"
+      summary: "Return all agent intents"
+      description: "Returns all intents"
+      operationId: "ListAllIntents"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "projectID"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "projectCred"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid google project ID supplied"
+        404:
+          description: "Project not found"
+      security:
+        - api_key: []
+  /entities/{projectID}/{projectCred}/{entityTypeID}:
+    get:
+      tags:
+        - "entities"
+      summary: "Return all agent intents"
+      description: "Returns all intents"
+      operationId: "ListAllEntitiesFromID"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "projectID"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "projectCred"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "entityTypeID"
+          in: "path"
+          description: "Name of Entity"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid google project ID supplied"
+        404:
+          description: "Project not found"
+      security:
+        - api_key: []
+
+
+
+
+  /intent/{projectID}/{projectCred}/{additionalInfo}:
+    get:
+      tags:
+        - "intent"
+      summary: "Get a specific response based on user utterance"
+      description: ""
+      operationId: "GetIntent"
+      consumes:
+        - "multipart/form-data"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "projectID"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "projectCred"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "additionalInfo"
+          in: "path"
+          description: "DisplayName of Intent"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+
+    post:
+      tags:
+        - "intent"
+      summary: "Create a new intent"
+      description: ""
+      operationId: "CreateAnIntent"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "projectID"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "projectCred"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "additionalInfo"
+          in: "path"
+          description: "Name of Intent"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+
+        400:
+          description: "Invalid Order"
+    patch:
+      tags:
+        - "intent"
+      summary: "Get a specific response based on user utterance"
+      description: ""
+      operationId: "UpdateAnIntent"
+      consumes:
+        - "multipart/form-data"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "projectID"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "projectCred"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "additionalInfo"
+          in: "path"
+          description: "Intent Path"
+          required: true
+          type: "string"
+
+      responses:
+        200:
+          description: "successful operation"
+
+    delete:
+      tags:
+        - "intent"
+      summary: "Delete an intent"
+      description: ""
+      operationId: "DeleteAnIntent"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "projectID"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "projectCred"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "additionalInfo"
+          in: "path"
+          description: "Intent Path"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+
+        400:
+          description: "Invalid Order"
+
+
+
+  /entity/{projectID}/{projectCred}/{additionalInfo}:
+    get:
+      tags:
+        - "entity"
+      summary: "Get a specific response based on user utterance"
+      description: ""
+      operationId: "GetEntity"
+      consumes:
+        - "multipart/form-data"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "projectID"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "projectCred"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "additionalInfo"
+          in: "path"
+          description: "DisplayName of Intent"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+
+    post:
+      tags:
+        - "entity"
+      summary: "Create a new entity"
+      description: ""
+      operationId: "CreateEntity"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "projectID"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "projectCred"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "additionalInfo"
+          in: "path"
+          description: "Name of Intent"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+
+        400:
+          description: "Invalid Order"
+
+    patch:
+      tags:
+        - "entity"
+      summary: "Get a specific response based on user utterance"
+      description: ""
+      operationId: "UpdateEntity"
+      consumes:
+        - "multipart/form-data"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "projectID"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "projectCred"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "additionalInfo"
+          in: "path"
+          description: "Intent Path"
+          required: true
+          type: "string"
+
+      responses:
+        200:
+          description: "successful operation"
+
+    delete:
+      tags:
+        - "entity"
+      summary: "Delete an entity"
+      description: ""
+      operationId: "DeleteAnEntity"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "projectID"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "projectCred"
+          in: "path"
+          description: "ID of google project"
+          required: true
+          type: "string"
+        - name: "additionalInfo"
+          in: "path"
+          description: "Intent Path"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+
+        400:
+          description: "Invalid Order"
+
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
